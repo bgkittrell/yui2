@@ -3878,7 +3878,10 @@ var Dom = YAHOO.util.Dom,
                 action = 'hilitecolor';
             }
 
-            if (!this._isElement(el, 'body') && !this._hasSelection()) {
+            if (this.browser.gecko > 1.8) {
+              this._getDoc().execCommand(action, false, value);
+              exec = false;
+            } else if (!this._isElement(el, 'body') && !this._hasSelection()) {
                 el.style.backgroundColor = value;
                 this._selectNode(el);
                 exec = false;
@@ -3903,7 +3906,10 @@ var Dom = YAHOO.util.Dom,
             var exec = true,
                 el = this._getSelectedElement();
                 
-                if (!this._isElement(el, 'body') && !this._hasSelection()) {
+                if (this.browser.gecko > 1.8) {
+                  this._getDoc().execCommand('forecolor', false, value);
+                  exec = false;
+                } else if (!this._isElement(el, 'body') && !this._hasSelection()) {
                     Dom.setStyle(el, 'color', value);
                     this._selectNode(el);
                     exec = false;
