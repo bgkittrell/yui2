@@ -2173,7 +2173,15 @@
         <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;caption&quot;</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">_initCaptionEl</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;caption&quot;</span><span class="p">));</span>
         <span class="p">}</span>
-    <span class="p">}</span> 
+
+        <span class="c1">// Set up mouseover/mouseout events via mouseenter/mouseleave delegation</span>
+        <span class="nx">Ev</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_elTable</span><span class="p">,</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseover</span><span class="p">,</span> <span class="s2">&quot;thead .&quot;</span><span class="o">+</span><span class="nx">DT</span><span class="p">.</span><span class="nx">CLASS_LABEL</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="nx">Ev</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_elTable</span><span class="p">,</span> <span class="s2">&quot;mouseleave&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseout</span><span class="p">,</span> <span class="s2">&quot;thead .&quot;</span><span class="o">+</span><span class="nx">DT</span><span class="p">.</span><span class="nx">CLASS_LABEL</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="nx">Ev</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_elTable</span><span class="p">,</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseover</span><span class="p">,</span> <span class="s2">&quot;tbody.yui-dt-data&gt;tr&gt;td&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="nx">Ev</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_elTable</span><span class="p">,</span> <span class="s2">&quot;mouseleave&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseout</span><span class="p">,</span> <span class="s2">&quot;tbody.yui-dt-data&gt;tr&gt;td&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="nx">Ev</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_elTable</span><span class="p">,</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseover</span><span class="p">,</span> <span class="s2">&quot;tbody.yui-dt-message&gt;tr&gt;td&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="nx">Ev</span><span class="p">.</span><span class="nx">delegate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_elTable</span><span class="p">,</span> <span class="s2">&quot;mouseleave&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseout</span><span class="p">,</span> <span class="s2">&quot;tbody.yui-dt-message&gt;tr&gt;td&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">},</span>
 
 <span class="cm">/**</span>
@@ -2315,11 +2323,12 @@
         <span class="c1">// Set up DOM events for THEAD</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elThead</span><span class="p">,</span> <span class="s2">&quot;focus&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTheadFocus</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elThead</span><span class="p">,</span> <span class="s2">&quot;keydown&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTheadKeydown</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elThead</span><span class="p">,</span> <span class="s2">&quot;mouseover&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseover</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elThead</span><span class="p">,</span> <span class="s2">&quot;mouseout&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseout</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elThead</span><span class="p">,</span> <span class="s2">&quot;mousedown&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMousedown</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elThead</span><span class="p">,</span> <span class="s2">&quot;mouseup&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseup</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elThead</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTheadClick</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        
+        <span class="c1">// Bug 2528073: mouseover/mouseout handled via mouseenter/mouseleave</span>
+        <span class="c1">// delegation at the TABLE level</span>
 
         <span class="c1">// Since we can&#39;t listen for click and dblclick on the same element...</span>
         <span class="c1">// Attach separately to THEAD and TBODY</span>
@@ -2716,14 +2725,15 @@
     
         <span class="c1">// Set up DOM events for TBODY</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;focus&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTbodyFocus</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;mouseover&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseover</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;mouseout&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseout</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;mousedown&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMousedown</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;mouseup&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseup</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;keydown&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTbodyKeydown</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;keypress&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableKeypress</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elTbody</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTbodyClick</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        
+
+        <span class="c1">// Bug 2528073: mouseover/mouseout handled via mouseenter/mouseleave</span>
+        <span class="c1">// delegation at the TABLE level</span>
+
         <span class="c1">// Since we can&#39;t listen for click and dblclick on the same element...</span>
         <span class="c1">// Attach separately to THEAD and TBODY</span>
         <span class="c1">///Ev.addListener(elTbody, &quot;dblclick&quot;, this._onTableDblclick, this);</span>
@@ -2779,13 +2789,14 @@
 
         <span class="c1">// Set up DOM events for TBODY</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;focus&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTbodyFocus</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;mouseover&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseover</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;mouseout&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseout</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;mousedown&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMousedown</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;mouseup&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableMouseup</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;keydown&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTbodyKeydown</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;keypress&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTableKeypress</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
         <span class="nx">Ev</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">elMsgTbody</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onTbodyClick</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+
+        <span class="c1">// Bug 2528073: mouseover/mouseout handled via mouseenter/mouseleave</span>
+        <span class="c1">// delegation at the TABLE level</span>
     <span class="p">}</span>
 <span class="p">},</span>
 
@@ -3496,11 +3507,13 @@
 <span class="cm"> *</span>
 <span class="cm"> * @method _onTableMouseover</span>
 <span class="cm"> * @param e {HTMLEvent} The mouseover event.</span>
+<span class="cm"> * @param origTarget {HTMLElement} The mouseenter delegated element.</span>
+<span class="cm"> * @param container {HTMLElement} The mouseenter delegation container.</span>
 <span class="cm"> * @param oSelf {YAHOO.wiget.DataTable} DataTable instance.</span>
 <span class="cm"> * @private</span>
 <span class="cm"> */</span>
-<span class="nx">_onTableMouseover</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">oSelf</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">elTarget</span> <span class="o">=</span> <span class="nx">Ev</span><span class="p">.</span><span class="nx">getTarget</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="nx">_onTableMouseover</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">origTarget</span><span class="p">,</span> <span class="nx">container</span><span class="p">,</span> <span class="nx">oSelf</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">elTarget</span> <span class="o">=</span> <span class="nx">origTarget</span><span class="p">;</span>
         <span class="kd">var</span> <span class="nx">elTag</span> <span class="o">=</span> <span class="nx">elTarget</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
         <span class="kd">var</span> <span class="nx">bKeepBubbling</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
         <span class="k">while</span><span class="p">(</span><span class="nx">elTarget</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">elTag</span> <span class="o">!=</span> <span class="s2">&quot;table&quot;</span><span class="p">))</span> <span class="p">{</span>
@@ -3555,11 +3568,13 @@
 <span class="cm"> *</span>
 <span class="cm"> * @method _onTableMouseout</span>
 <span class="cm"> * @param e {HTMLEvent} The mouseout event.</span>
+<span class="cm"> * @param origTarget {HTMLElement} The mouseleave delegated element.</span>
+<span class="cm"> * @param container {HTMLElement} The mouseleave delegation container.</span>
 <span class="cm"> * @param oSelf {YAHOO.wiget.DataTable} DataTable instance.</span>
 <span class="cm"> * @private</span>
 <span class="cm"> */</span>
-<span class="nx">_onTableMouseout</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">oSelf</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">elTarget</span> <span class="o">=</span> <span class="nx">Ev</span><span class="p">.</span><span class="nx">getTarget</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="nx">_onTableMouseout</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">origTarget</span><span class="p">,</span> <span class="nx">container</span><span class="p">,</span> <span class="nx">oSelf</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">elTarget</span> <span class="o">=</span> <span class="nx">origTarget</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">elTag</span> <span class="o">=</span> <span class="nx">elTarget</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
     <span class="kd">var</span> <span class="nx">bKeepBubbling</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
     <span class="k">while</span><span class="p">(</span><span class="nx">elTarget</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">elTag</span> <span class="o">!=</span> <span class="s2">&quot;table&quot;</span><span class="p">))</span> <span class="p">{</span>
@@ -10318,10 +10333,7 @@
 <span class="cm"> * @param oArgs.target {HTMLElement} Target element.</span>
 <span class="cm"> */</span>
 <span class="nx">onEventHighlightColumn</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//TODO: filter for all spurious events at a lower level</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">isAncestor</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span><span class="nx">Ev</span><span class="p">.</span><span class="nx">getRelatedTarget</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="p">)))</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">highlightColumn</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">highlightColumn</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <span class="p">},</span>
 
 <span class="cm">/**</span>
@@ -10333,10 +10345,7 @@
 <span class="cm"> * @param oArgs.target {HTMLElement} Target element.</span>
 <span class="cm"> */</span>
 <span class="nx">onEventUnhighlightColumn</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//TODO: filter for all spurious events at a lower level</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">isAncestor</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span><span class="nx">Ev</span><span class="p">.</span><span class="nx">getRelatedTarget</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="p">)))</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">unhighlightColumn</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">unhighlightColumn</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <span class="p">},</span>
 
 <span class="cm">/**</span>
@@ -10385,10 +10394,7 @@
 <span class="cm"> * @param oArgs.target {HTMLElement} Target element.</span>
 <span class="cm"> */</span>
 <span class="nx">onEventHighlightRow</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//TODO: filter for all spurious events at a lower level</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">isAncestor</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span><span class="nx">Ev</span><span class="p">.</span><span class="nx">getRelatedTarget</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="p">)))</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">highlightRow</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">highlightRow</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <span class="p">},</span>
 
 <span class="cm">/**</span>
@@ -10400,10 +10406,7 @@
 <span class="cm"> * @param oArgs.target {HTMLElement} Target element.</span>
 <span class="cm"> */</span>
 <span class="nx">onEventUnhighlightRow</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//TODO: filter for all spurious events at a lower level</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">isAncestor</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span><span class="nx">Ev</span><span class="p">.</span><span class="nx">getRelatedTarget</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="p">)))</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">unhighlightRow</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">unhighlightRow</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <span class="p">},</span>
 
 <span class="cm">/**</span>
@@ -10415,10 +10418,7 @@
 <span class="cm"> * @param oArgs.target {HTMLElement} Target element.</span>
 <span class="cm"> */</span>
 <span class="nx">onEventHighlightCell</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//TODO: filter for all spurious events at a lower level</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">isAncestor</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span><span class="nx">Ev</span><span class="p">.</span><span class="nx">getRelatedTarget</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="p">)))</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">highlightCell</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">highlightCell</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <span class="p">},</span>
 
 <span class="cm">/**</span>
@@ -10430,10 +10430,7 @@
 <span class="cm"> * @param oArgs.target {HTMLElement} Target element.</span>
 <span class="cm"> */</span>
 <span class="nx">onEventUnhighlightCell</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//TODO: filter for all spurious events at a lower level</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">Dom</span><span class="p">.</span><span class="nx">isAncestor</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">,</span><span class="nx">Ev</span><span class="p">.</span><span class="nx">getRelatedTarget</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">event</span><span class="p">)))</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">unhighlightCell</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">unhighlightCell</span><span class="p">(</span><span class="nx">oArgs</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
 <span class="p">},</span>
 
 <span class="cm">/**</span>

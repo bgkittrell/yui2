@@ -34,7 +34,7 @@
 		BAR_EL = 'barEl',
 		MASK_EL = 'maskEl',
 		ARIA_TEXT_TEMPLATE = 'ariaTextTemplate',
-		ACC = 'accelerator',
+		ACC = 'animAcceleration',
 		BG_POSITION = 'background-position',
 		PX = 'px',
 		// Events
@@ -312,12 +312,12 @@
 			});
 			
 			/**
-			 * @attribute accelerator
+			 * @attribute animAcceleration
 			 * @description It accepts a number or null to cancel.  
 			 * If a number, it is how fast the background image for the bar will move in the 
 			 * opposite direction to the bar itself. null or 0 means the background won't move.
 			 * Negative values will make the background move along the bar.
-			 * Only valid with animation active and requires a suitable background image to make it evident.
+			 * Only valid with animation active and it requires a suitable background image to make it evident.
 			 * @default null
 			 * @type {number} or {null}
 			 */
@@ -553,11 +553,11 @@
 		/** 
 		 * Temporary solution until http://yuilibrary.com/projects/yui2/ticket/2528222 gets solved.
 		 * Also fixes: http://yuilibrary.com/projects/yui2/ticket/2528919.
-		 * It also handles moving the background as per the accelerator configuration attribute
+		 * It also handles moving the background as per the animAcceleration configuration attribute
 		 * since it turned out to be the best place to handle it.
 		 * @method _fixAnim
 		 * @param anim {YAHOO.util.Anim} Instance of Animation to fix
-		 * @param acc {number} Value of accelerator attribute
+		 * @param acc {number} Value of animAcceleration attribute
 		 * @return  void
 		 * @private
 		 */	
@@ -565,37 +565,37 @@
 
 
 			if (anim) {
-				if (!this.oldSetAttribute) {
-					this.oldSetAttribute = anim.setAttribute;
+				if (!this._oldSetAttribute) {
+					this._oldSetAttribute = anim.setAttribute;
 				}
 				var	pb = this;
 				switch(this.get(DIRECTION)) {
 					case DIRECTION_LTR:
 						anim.setAttribute = function(attr , val , unit) {
 							val = Math.round(val);
-							pb.oldSetAttribute.call(this,attr,val,unit);
+							pb._oldSetAttribute.call(this,attr,val,unit);
 							if (attr == WIDTH) {
-								pb.oldSetAttribute.call(this,BG_POSITION,-val * acc,PX);
+								pb._oldSetAttribute.call(this,BG_POSITION,-val * acc,PX);
 							}
 						};
 						break;
 					case DIRECTION_RTL:
 						anim.setAttribute = function(attr , val , unit) {
 							val = Math.round(val);
-							pb.oldSetAttribute.call(this,attr,val,unit);
+							pb._oldSetAttribute.call(this,attr,val,unit);
 							if (attr == WIDTH) {
 								var left = pb._barSpace - val;
-								pb.oldSetAttribute.call(this,'left',left, PX);
-								pb.oldSetAttribute.call(this, BG_POSITION, -left +  val * acc, PX);
+								pb._oldSetAttribute.call(this,'left',left, PX);
+								pb._oldSetAttribute.call(this, BG_POSITION, -left +  val * acc, PX);
 							}
 						};
 						break;
 					case DIRECTION_TTB:
 						anim.setAttribute = function(attr , val , unit) {
 							val = Math.round(val);
-							pb.oldSetAttribute.call(this,attr,val,unit);
+							pb._oldSetAttribute.call(this,attr,val,unit);
 							if (attr == HEIGHT) {
-								pb.oldSetAttribute.call(this,BG_POSITION,'center ' + (- val * acc),PX);
+								pb._oldSetAttribute.call(this,BG_POSITION,'center ' + (- val * acc),PX);
 							}
 						};
 						break;
@@ -603,11 +603,11 @@
 					case DIRECTION_BTT:
 						anim.setAttribute = function(attr , val , unit) {
 							val = Math.round(val);
-							pb.oldSetAttribute.call(this,attr,val,unit);
+							pb._oldSetAttribute.call(this,attr,val,unit);
 							if (attr == HEIGHT) {
 								var top = pb._barSpace - val;
-								pb.oldSetAttribute.call(this,'top',top, PX);
-								pb.oldSetAttribute.call(this, BG_POSITION,'center ' + (val * acc - top), PX);
+								pb._oldSetAttribute.call(this,'top',top, PX);
+								pb._oldSetAttribute.call(this, BG_POSITION,'center ' + (val * acc - top), PX);
 							}
 						};
 						break;
