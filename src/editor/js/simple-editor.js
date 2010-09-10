@@ -3906,10 +3906,7 @@ var Dom = YAHOO.util.Dom,
             var exec = true,
                 el = this._getSelectedElement();
                 
-                if (this.browser.gecko > 1.8) {
-                  this._getDoc().execCommand('forecolor', false, value);
-                  exec = false;
-                } else if (!this._isElement(el, 'body') && !this._hasSelection()) {
+                if (!this._isElement(el, 'body') && !this._hasSelection()) {
                     Dom.setStyle(el, 'color', value);
                     this._selectNode(el);
                     exec = false;
@@ -4411,8 +4408,9 @@ var Dom = YAHOO.util.Dom,
                 }
             } else {
                 //Force CSS Styling for this action...
-                this._setEditorStyle(true);
+                this._setEditorStyle(false);
                 this._getDoc().execCommand('fontname', false, 'yui-tmp');
+                this._setEditorStyle(true);
                 var _tmp = [], __tmp, __els = ['font', 'span', 'i', 'b', 'u'];
 
                 if (!this._isElement(this._getSelectedElement(), 'body')) {
