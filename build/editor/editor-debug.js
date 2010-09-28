@@ -8395,7 +8395,7 @@ var Dom = YAHOO.util.Dom,
                         case 'left':
                             tbar.deselectAllButtons();
                             el.style.display = '';
-                            el.align = o.button.value;
+                            el.className = o.button.value;
                             break;
                         case 'inline':
                             tbar.deselectAllButtons();
