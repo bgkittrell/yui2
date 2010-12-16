@@ -4057,7 +4057,7 @@ var Dom = YAHOO.util.Dom,
                             //Insert a <br> instead of a <p></p> in Internet Explorer
                             _range = this._getRange();
                             tar = this._getSelectedElement();
-                            if (!this._isElement(tar, 'li')) {
+                            if (!this._isElement(tar, 'li') && !tar.tagName.match(/h\d+/i)) {
                                 if (_range) {
                                     _range.pasteHTML('<br>');
                                     _range.collapse(false);
@@ -8297,19 +8297,10 @@ var Dom = YAHOO.util.Dom,
                             break;
                         case 'right':
                         case 'left':
-                            tbar.deselectAllButtons();
-                            el.style.display = '';
-                            el.className = o.button.value;
-                            break;
                         case 'inline':
-                            tbar.deselectAllButtons();
-                            el.style.display = '';
-                            el.align = '';
-                            break;
                         case 'block':
                             tbar.deselectAllButtons();
-                            el.style.display = 'block';
-                            el.align = 'center';
+                            el.className = o.button.value;
                             break;
                         case 'padding':
                             var _button = tbar.getButtonById(o.button.id);
