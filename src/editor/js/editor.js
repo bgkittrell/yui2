@@ -901,19 +901,10 @@ var Dom = YAHOO.util.Dom,
                             break;
                         case 'right':
                         case 'left':
-                            tbar.deselectAllButtons();
-                            el.style.display = '';
-                            el.align = o.button.value;
-                            break;
                         case 'inline':
-                            tbar.deselectAllButtons();
-                            el.style.display = '';
-                            el.align = '';
-                            break;
                         case 'block':
                             tbar.deselectAllButtons();
-                            el.style.display = 'block';
-                            el.align = 'center';
+                            el.className = o.button.value;
                             break;
                         case 'padding':
                             var _button = tbar.getButtonById(o.button.id);

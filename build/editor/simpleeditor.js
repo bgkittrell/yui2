@@ -4057,7 +4057,7 @@ var Dom = YAHOO.util.Dom,
                             //Insert a <br> instead of a <p></p> in Internet Explorer
                             _range = this._getRange();
                             tar = this._getSelectedElement();
-                            if (!this._isElement(tar, 'li')) {
+                            if (!this._isElement(tar, 'li') && !tar.tagName.match(/h\d+/i)) {
                                 if (_range) {
                                     _range.pasteHTML('<br>');
                                     _range.collapse(false);
@@ -5970,7 +5970,10 @@ var Dom = YAHOO.util.Dom,
                 action = 'hilitecolor';
             }
 
-            if (!this._isElement(el, 'body') && !this._hasSelection()) {
+            if (this.browser.gecko > 1.8) {
+              this._getDoc().execCommand(action, false, value);
+              exec = false;
+            } else if (!this._isElement(el, 'body') && !this._hasSelection()) {
                 el.style.backgroundColor = value;
                 this._selectNode(el);
                 exec = false;
@@ -6489,8 +6492,9 @@ var Dom = YAHOO.util.Dom,
                 }
             } else {
                 //Force CSS Styling for this action...
-                this._setEditorStyle(true);
+                this._setEditorStyle(false);
                 this._getDoc().execCommand('fontname', false, 'yui-tmp');
+                this._setEditorStyle(true);
                 var _tmp = [], __tmp, __els = ['font', 'span', 'i', 'b', 'u'];
 
                 if (!this._isElement(this._getSelectedElement(), 'body')) {
